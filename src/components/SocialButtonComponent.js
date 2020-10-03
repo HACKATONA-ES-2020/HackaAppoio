@@ -6,16 +6,16 @@ import colors from "../constants/colors";
 // valores para type:
 // - google: botão do Google
 // - facebook: botão do Facebook
-export default function ButtonComponent({ type, onPress, style }) {
+export default function SocialButtonComponent({ type, onPress, style }) {
   let text = "";
   let imageSource;
 
   if (type === "google") {
     text = "Entrar com Google";
-    imageSource = require("../../assets/logo-google.png");
+    imageSource = require("../assets/logo-google.png");
   } else if (type === "facebook") {
     text = "Entrar com Facebook";
-    imageSource = require("../../assets/logo-facebook.png");
+    imageSource = require("../assets/logo-facebook.png");
   } else {
     console.error("Expected value on 'type' props.");
   }

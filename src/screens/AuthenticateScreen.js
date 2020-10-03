@@ -3,24 +3,36 @@ import { StyleSheet, View, Image } from "react-native";
 import { setStatusBarStyle } from "expo-status-bar";
 import colors from "../constants/colors";
 
-import SocialButtonComponent from '../components/SocialButtonComponent';
+import SocialButtonComponent from "../components/SocialButtonComponent";
 
 export default function AuthenticateScreen({ navigation }) {
   useEffect(() => {
-    setStatusBarStyle("light")
-  }, [])
+    setStatusBarStyle("light");
+  }, []);
+
+  const authenticate = (provider) => {
+    // TODO: !!
+    navigation.navigate("ExtraInfo");
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
           style={styles.image}
-          source={require("../../assets/header-large.png")}
+          source={require("../assets/header-large.png")}
         />
       </View>
       <View style={styles.buttonsContainer}>
-        <SocialButtonComponent type="google" style={styles.google}/>
-        <SocialButtonComponent type="facebook" />
+        <SocialButtonComponent
+          type="google"
+          style={styles.google}
+          onPress={() => authenticate("google")}
+        />
+        <SocialButtonComponent
+          type="facebook"
+          onPress={() => authenticate("facebook")}
+        />
       </View>
     </View>
   );
@@ -47,6 +59,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   google: {
-    marginBottom: 16
+    marginBottom: 16,
   },
 });
