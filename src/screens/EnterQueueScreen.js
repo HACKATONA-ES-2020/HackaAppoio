@@ -5,7 +5,7 @@ import colors from "../constants/colors";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function EnterQueue() {
+export default function EnterQueue({ route, navigation }) {
   const [preferencial, setPreferencial] = useState(false);
   const [guestNumber, setGuestNumber] = useState(1);
   const storeName = "Loja";

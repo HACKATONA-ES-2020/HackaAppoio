@@ -38,7 +38,7 @@ export default function BarcodeCamera({ onChange }) {
       {CameraPermissionGranted === null && (
         <>
           <View style={styles.container}>
-            <Text>Please grant Camera permission</Text>
+            <Text>Conceda a permissão de à câmera</Text>
           </View>
         </>
       )}
@@ -46,7 +46,7 @@ export default function BarcodeCamera({ onChange }) {
       {!CameraPermissionGranted && (
         <>
           <View style={styles.container}>
-            <Text>Camera Permission Denied.</Text>
+            <Text>Permissão de acesso à camera não concedido.</Text>
           </View>
         </>
       )}
@@ -63,7 +63,7 @@ export default function BarcodeCamera({ onChange }) {
             <BarCodeScanner
               onBarCodeScanned={QRCodeScanned}
               style={{
-                height: DEVICE_HEIGHT / 2.5,
+                height: DEVICE_HEIGHT / 1.8,
                 width: DEVICE_WIDTH + 2,
               }}
             ></BarCodeScanner>
