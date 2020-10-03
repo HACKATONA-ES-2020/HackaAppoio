@@ -4,6 +4,7 @@ import { setStatusBarStyle } from "expo-status-bar";
 import colors from "../constants/colors";
 
 import SocialButtonComponent from "../components/SocialButtonComponent";
+import { CommonActions } from "@react-navigation/native";
 
 export default function AuthenticateScreen({ navigation }) {
   useEffect(() => {
@@ -12,7 +13,9 @@ export default function AuthenticateScreen({ navigation }) {
 
   const authenticate = (provider) => {
     // TODO: !!
-    navigation.navigate("ExtraInfo");
+    navigation.dispatch(
+      CommonActions.reset({ index: 0, routes: [{ name: "ExtraInfo" }] })
+    );
   };
 
   return (
