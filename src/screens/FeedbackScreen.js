@@ -8,7 +8,7 @@ import CustomCheckBox from "../components/CustomCheckBox";
 import colors from "../constants/colors";
 import texts from "../constants/texts";
 
-export default function FeedbackScreen() {
+export default function FeedbackScreen({ navigation }) {
   const [checkboxes, setCheckboxes] = useState([ false, false, false, false, false ]);
 
   const onValueChange = (newValue, index) => {
@@ -48,7 +48,7 @@ export default function FeedbackScreen() {
             </View>
             )
         }
-        <Button text="Enviar Feedback" style={{ marginTop: 80 }} />
+        <Button text="Enviar Feedback" style={{ marginTop: 80 }} onPress={() => navigation.navigate('ConfirmedFeedback')} />
       </ScrollView>
     </View>
   );
