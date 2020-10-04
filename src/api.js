@@ -1,3 +1,5 @@
+import * as FileSystem from "expo-file-system";
+import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
 import "firebase/firestore";
 import { firebaseConfig } from "./configs";
@@ -22,6 +24,26 @@ const lastIndexWhere = (array, predicate) => {
 
 const dbh = firebase.firestore();
 
+/**
+ * Persiste uma imagem no Firebase Storage.
+ *
+ * @param {string} basePath caminho base para a imagem no storage
+ * @param {string} filename nome da imagem (com extensão)
+ * @param {string} path caminho da imagem no sistema de arquivos
+ * @returns {Promise} promise que completa quando o upload é finalizado
+ */
+export const uploadImage = (basePath, filename, path) => {
+  return fetch(path)
+    .then((d) => d.blob())
+    .then((data) => {
+      return firebase
+        .storage()
+        .ref()
+        .child(`${basePath}/${filename}`)
+        .put(data);
+    });
+};
+
 export async function processQRCode(establishmentId) {
   await __setUserId();
 
@@ -35,6 +57,11 @@ export async function processQRCode(establishmentId) {
     name: data.name,
   };
 }
+
+export const isSignedIn = async () => {
+  const userInfo = await _getCachedGoogleSignIn();
+  return userInfo !== null && userInfo !== undefined;
+};
 
 function updateWaitTimes(queue, baseTime) {
   const result = queue.slice();
