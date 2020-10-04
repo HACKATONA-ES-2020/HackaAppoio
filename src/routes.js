@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import ModelScreen from "./screens/ModelScreen";
+import FeedbackScreen from "./screens/FeedbackScreen";
 
 const Stack = createStackNavigator();
 
@@ -10,7 +11,8 @@ export function Screens() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="ModelScreen" component={ModelScreen} />
+        {/* <Stack.Screen name="ModelScreen" component={ModelScreen} /> */}
+        <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
