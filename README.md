@@ -13,7 +13,7 @@ npm start
 Acesse nossa wiki: https://github.com/HACKATONA-ES-2020/HackaAppoio/wiki
 
 # Mockups
-Os mocks foram desenvolvidos utilizando a ferramenta Figma. Os mesmos podem ser encontrado no seguinte link: [no spoiler]
+Os mocks foram desenvolvidos utilizando o Figma. Link para os mocks e fluxos: https://www.figma.com/file/VXzxTTJH3QLCFhLXoxXc2a/HackAppoio?node-id=0%3A1
 
 
 # Deployment Diagram
