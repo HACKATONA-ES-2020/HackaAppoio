@@ -51,7 +51,10 @@ export default function PositionScreen({ navigation }) {
               Vá até a <Text style={styles.name}>{storeName}</Text>:
             </Text>
           </View>
-          <Button text="Entrar no local" />
+          <Button
+            text="Entrar no local"
+            onPress={() => navigation.navigate("QRCodeGeneratorUserScreen")}
+          />
         </View>
       )}
     </View>
