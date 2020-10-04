@@ -35,7 +35,8 @@
     "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-web": "~0.13.12",
-    "react-navigation": "^4.4.2"
+    "react-navigation": "^4.4.2",
+    "expo-notifications": "~0.7.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

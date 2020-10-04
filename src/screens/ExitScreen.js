@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import colors from "../constants/colors";
 
@@ -20,11 +20,11 @@ export default function PositionScreen({ navigation }) {
           <Image
             source={require("../assets/exit.png")}
             style={{
-              alignSelf: 'center',
+              alignSelf: "center",
               width: 400,
               height: 300,
               marginTop: 30,
-              marginBottom: 30
+              marginBottom: 30,
             }}
           />
           <Text style={styles.description}>

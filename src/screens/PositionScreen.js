@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import colors from "../constants/colors";
 import * as Progress from "react-native-progress";
+import * as Notifications from "expo-notifications";
 
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
@@ -10,6 +11,18 @@ export default function PositionScreen({ navigation }) {
   const storeName = "Loja";
   const [position, setPosition] = useState(1);
   const [time, setTime] = useState(5);
+
+  function scheduleNotification() {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: `A espera acabou!`,
+        body: `Chegou a sua vez de entrar na ${storeName} `,
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+  }
 
   return (
     <View style={styles.screen}>
@@ -24,15 +37,16 @@ export default function PositionScreen({ navigation }) {
             <Image
               source={require("../assets/time.png")}
               style={{
-                alignSelf: 'center',
+                alignSelf: "center",
                 width: 400,
                 height: 280,
                 marginTop: 30,
-                marginBottom: 30
+                marginBottom: 30,
               }}
             />
             <Text style={styles.description}>
-              Em torno de <Text style={styles.name}>{time}</Text> minutos você será chamado
+              Em torno de <Text style={styles.name}>{time}</Text> minutos você
+              será chamado
             </Text>
             <Button
               text="Sair da fila"
@@ -56,11 +70,11 @@ export default function PositionScreen({ navigation }) {
             <Image
               source={require("../assets/celebration.png")}
               style={{
-                alignSelf: 'center',
+                alignSelf: "center",
                 width: 400,
                 height: 300,
                 marginTop: 30,
-                marginBottom: 30
+                marginBottom: 30,
               }}
             />
             <Text style={styles.description}>
