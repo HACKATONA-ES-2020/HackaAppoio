@@ -18,6 +18,7 @@ export default function CustomProgressBar({
   progress = 0.2,
   title,
   height,
+  subTitle,
   ...props
 }) {
   const color = {
@@ -36,16 +37,28 @@ export default function CustomProgressBar({
         height={height}
         {...props}
       />
-      <Text
-        style={{
-          color: colors.textPlaceHolder,
-          fontSize: 16,
-          paddingLeft: 2,
-          paddingTop: 5,
-        }}
-      >
-        {title}
-      </Text>
+      <View style={styles.titles}>
+        <Text
+          style={{
+            color: colors.textPlaceHolder,
+            fontSize: 16,
+            paddingLeft: 2,
+            paddingTop: 5,
+          }}
+        >
+          {subTitle}
+        </Text>
+        <Text
+          style={{
+            color: colors.textPlaceHolder,
+            fontSize: 16,
+            paddingLeft: 2,
+            paddingTop: 5,
+          }}
+        >
+          {title}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -53,5 +66,9 @@ export default function CustomProgressBar({
 const styles = StyleSheet.create({
   container: {
     justifyContent: "flex-start",
+  },
+  titles: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
