@@ -8,7 +8,7 @@ import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
 export default function PositionScreen({ navigation, route }) {
-  const { exitQueue, onUpdateObject, establishment } = route.params;
+  const { exitQueue, onUpdateObject, establishment, people } = route.params;
 
   const storeName = establishment.name;
   const [position, setPosition] = useState(1);
@@ -27,7 +27,7 @@ export default function PositionScreen({ navigation, route }) {
   }
 
   async function enterEstablishmentPressed() {
-    navigation.navigate("QRCodeGeneratorUserScreen", { establishment });
+    navigation.navigate("QRCodeGeneratorUserScreen", { establishment, people });
   }
 
   function scheduleNotification() {

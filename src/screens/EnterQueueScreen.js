@@ -27,7 +27,12 @@ export default function EnterQueue({ navigation, route }) {
       }
     );
 
-    navigation.navigate("PositionScreen", { exitQueue, onUpdateObject, establishment });
+    navigation.navigate("PositionScreen", {
+      exitQueue,
+      onUpdateObject,
+      establishment,
+      people: guestNumber,
+    });
   };
 
   return (

@@ -8,7 +8,7 @@ import colors from "../constants/colors";
 import { enterEstablishment } from "../api";
 
 export default function App({ navigation, route }) {
-  const { establishment } = route.params;
+  const { establishment, people } = route.params;
   const [scanned, setScanned] = useState(false);
 
   Notifications.setNotificationHandler({
@@ -35,7 +35,7 @@ export default function App({ navigation, route }) {
   async function onPressEnterEstablishment() {
     scheduleNotification(establishment.name);
     await enterEstablishment(establishment.id);
-    navigation.navigate("ExitScreen", { establishment });
+    navigation.navigate("ExitScreen", { establishment, people });
   }
 
   return (

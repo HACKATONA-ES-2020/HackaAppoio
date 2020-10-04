@@ -18,7 +18,7 @@ const lastIndexWhere = (array, predicate) => {
   const index = array.slice().reverse().findIndex(predicate);
   const count = array.length - 1;
   return index >= 0 ? count - index : index;
-}
+};
 
 const dbh = firebase.firestore();
 
@@ -75,11 +75,10 @@ export async function joinQueue(
   };
 
   const queue = data.queue.slice();
-  
 
   // push to data.queue, on the proper position
   if (priority) {
-    let lastIndex = lastIndexWhere(queue, val => val.priority === true) + 1;
+    let lastIndex = lastIndexWhere(queue, (val) => val.priority === true) + 1;
     if (lastIndex < 0) {
       lastIndex = 0;
     }
@@ -162,4 +161,21 @@ export async function enterEstablishment(establishmentId) {
 export async function getQRCodeInfo() {
   await __setUserId();
   return { userId: CURRENT_USER_ID };
+}
+
+export async function leaveEstablishment(establishmentId, numberOfPeople) {
+  const snapshot = await dbh
+    .collection("establishments")
+    .doc(establishmentId)
+    .get();
+  const data = snapshot.data();
+
+  data.usedCapacity -= numberOfPeople;
+  const queue = data.queue.slice();
+  data.queue = updateWaitTimes(queue, data.usedCapacity * 10);
+
+  await dbh
+    .collection("establishments")
+    .doc(establishmentId)
+    .set(data, { mergeFields: ["queue", "usedCapacity"] });
 }
