@@ -12,17 +12,34 @@ export default function ModelScreen({ navigation }) {
         style={styles.content}
         onPress={() => navigation.navigate("QRCodeReaderScreen")}
       >
-        <Text style={styles.teste}>ModelScreen</Text>
+        <Text style={styles.teste}>QR CODE</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.content}
+        onPress={() => navigation.navigate("DetailStoreScreen")}
+      >
+        <Text style={styles.teste}>DetailStoreScreen</Text>
       </TouchableOpacity>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: colors.background,
-    justifyContent: "center",
+  screen: { flex: 1, backgroundColor: colors.background },
+  sayPoints: {
+    marginTop: -10,
+    marginBottom: 10,
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    color: colors.textBlack,
+    fontSize: 26,
+    fontWeight: "bold",
+  },
+  points: {
     alignItems: "center",
+    justifyContent: "center",
+    color: colors.complementary_primary,
+    fontSize: 36,
+    fontWeight: "bold",
   },
   content: {
     flex: 1,
@@ -32,10 +49,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     color: colors.textWhite,
     fontSize: 30,
-    paddingHorizontal: 70,
     paddingVertical: 10,
     fontWeight: "bold",
     borderRadius: 10,
+    textAlign: "center",
     elevation: 3,
+  },
+  nextRestaurants: {
+    marginBottom: 10,
+    color: colors.textBlack,
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 5,
+  },
+  nextqlqrpora: { width: 100 },
+  content: { margin: 20 },
+  nomeDoLocal: {
+    marginBottom: 5,
   },
 });

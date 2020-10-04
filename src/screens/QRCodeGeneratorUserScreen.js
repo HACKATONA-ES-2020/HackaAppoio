@@ -52,7 +52,10 @@ export default function App({ navigation, route }) {
       </View>
       <View style={styles.container}>
         {/* id : quantidade de pessoas*/}
-        <CustomQRCode linearGradient={[colors.primary]} content="4:3" />
+        <CustomQRCode
+          linearGradient={[colors.complementary_primary]}
+          content="4:3"
+        />
       </View>
       <TouchableOpacity
         style={styles.secretButton}
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   name: {
-    color: colors.primary,
+    color: colors.complementary_primary,
     fontWeight: "bold",
   },
   subtext: {

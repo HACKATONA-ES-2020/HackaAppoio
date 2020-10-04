@@ -22,9 +22,6 @@ export default function FeedbackScreen({ navigation }) {
     let newValues = checkboxes;
     newValues[index] = newValue;
     setCheckboxes([...newValues]);
-    if (index === 4) {
-      navigation.navigate("FeedbackCameraScreen");
-    }
   };
 
   return (
@@ -36,36 +33,14 @@ export default function FeedbackScreen({ navigation }) {
       <View style={styles.content}>
         <Text style={styles.title}>Como foi a sua experiência?</Text>
         {texts &&
-          texts.checkData.map((value, index) =>
-            index !== 4 ? (
-              <CustomCheckBox
-                label={value}
-                value={checkboxes[index]}
-                onChange={(newValue) => onValueChange(newValue, index)}
-              />
-            ) : (
-              <View style={styles.maskCheckContainer}>
-                <CustomCheckBox
-                  label={value}
-                  value={checkboxes[index]}
-                  onChange={(newValue) => onValueChange(newValue, index)}
-                />
-                <TouchableOpacity
-                  onPress={(newValue) => onValueChange(newValue, index)}
-                >
-                  <Image
-                    source={require("../assets/QR-camera.png")}
-                    style={{
-                      width: 50,
-                      height: 50,
-                      marginTop: 50,
-                      marginLeft: 50,
-                    }}
-                  />
-                </TouchableOpacity>
-              </View>
-            )
-          )}
+          texts.checkData.map((value, index) => (
+            <CustomCheckBox
+              key={index}
+              label={value}
+              value={checkboxes[index]}
+              onChange={(newValue) => onValueChange(newValue, index)}
+            />
+          ))}
         <Button
           text="Enviar Feedback"
           style={{ marginTop: 80 }}
