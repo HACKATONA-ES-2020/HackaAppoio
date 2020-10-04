@@ -1,17 +1,25 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Alert } from "react-native";
 import { setStatusBarStyle } from "expo-status-bar";
+import { CommonActions } from "@react-navigation/native";
 import colors from "../constants/colors";
 
 import SocialButtonComponent from "../components/SocialButtonComponent";
-import { CommonActions } from "@react-navigation/native";
+import { performGoogleSignIn } from "../api";
 
 export default function AuthenticateScreen({ navigation }) {
   useEffect(() => {
     setStatusBarStyle("light");
   }, []);
 
-  const authenticate = (provider) => {
+  const authenticate = async (provider) => {
+    try {
+      const user = await performGoogleSignIn();
+      console.warn(user);
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+
     // TODO: !!
     navigation.dispatch(
       CommonActions.reset({ index: 0, routes: [{ name: "ExtraInfo" }] })
