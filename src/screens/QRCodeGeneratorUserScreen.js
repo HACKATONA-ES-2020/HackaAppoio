@@ -5,8 +5,10 @@ import { QRCode as CustomQRCode } from "react-native-custom-qr-codes-expo";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 import colors from "../constants/colors";
+import { enterEstablishment } from "../api";
 
-export default function App({ navigation }) {
+export default function App({ navigation, route }) {
+  const { establishment, people } = route.params;
   const [scanned, setScanned] = useState(false);
 
   Notifications.setNotificationHandler({
@@ -28,7 +30,12 @@ export default function App({ navigation }) {
         seconds: 10,
       },
     });
-    navigation.navigate("ExitScreen");
+  }
+
+  async function onPressEnterEstablishment() {
+    scheduleNotification(establishment.name);
+    await enterEstablishment(establishment.id);
+    navigation.navigate("ExitScreen", { establishment, people });
   }
 
   return (
@@ -49,7 +56,7 @@ export default function App({ navigation }) {
       </View>
       <TouchableOpacity
         style={styles.secretButton}
-        onPress={() => scheduleNotification("Centauro")}
+        onPress={onPressEnterEstablishment}
       >
         <Text style={styles.subtext}>
           Assim seus pontos serão validados! :)

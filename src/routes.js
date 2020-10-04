@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import colors from "./constants/colors";
-import { isSignedIn as checkIsSignedIn } from "./api";
+import { isSignedIn as checkIsSignedIn } from "./authentication";
 
 import ExitScreen from "./screens/ExitScreen";
 import PositionScreen from "./screens/PositionScreen";

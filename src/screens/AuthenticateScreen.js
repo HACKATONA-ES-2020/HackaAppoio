@@ -5,7 +5,7 @@ import { CommonActions } from "@react-navigation/native";
 import colors from "../constants/colors";
 
 import SocialButtonComponent from "../components/SocialButtonComponent";
-import { performGoogleSignIn } from "../api";
+import { performGoogleSignIn } from "../authentication";
 
 export default function AuthenticateScreen({ navigation }) {
   useEffect(() => {
