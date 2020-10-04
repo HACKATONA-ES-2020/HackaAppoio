@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
-export default function App() {
+import { uploadImage } from "../api";
+
+export default function FeedbackCameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -57,7 +59,9 @@ export default function App() {
               if (cameraRef) {
                 let photo = await cameraRef.takePictureAsync();
                 console.log("photo", photo);
+                await uploadImage("hacka-appoio", "1.jpg", photo.uri);
               }
+              navigation.navigate("ConfirmedFeedback");
             }}
           >
             <View

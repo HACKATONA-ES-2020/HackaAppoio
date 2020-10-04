@@ -1,3 +1,4 @@
+import * as FileSystem from "expo-file-system";
 import { AsyncStorage } from "react-native";
 import * as firebase from "firebase";
 import "firebase/firestore";
@@ -8,6 +9,26 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
+/**
+ * Persiste uma imagem no Firebase Storage.
+ *
+ * @param {string} basePath caminho base para a imagem no storage
+ * @param {string} filename nome da imagem (com extensão)
+ * @param {string} path caminho da imagem no sistema de arquivos
+ * @returns {Promise} promise que completa quando o upload é finalizado
+ */
+export const uploadImage = (basePath, filename, path) => {
+  return fetch(path)
+    .then((d) => d.blob())
+    .then((data) => {
+      return firebase
+        .storage()
+        .ref()
+        .child(`${basePath}/${filename}`)
+        .put(data);
+    });
+};
+
 const dbh = firebase.firestore();
 
 // TODO: use dbh to access firestore collections
@@ -15,7 +36,7 @@ const dbh = firebase.firestore();
 const isSignedIn = async () => {
   const userInfo = await _getCachedGoogleSignIn();
   return userInfo !== null && userInfo !== undefined;
-}
+};
 
 const performGoogleSignIn = async () => {
   try {
@@ -63,11 +84,11 @@ const _googleSignIn = async () => {
   }
 };
 
-const GOOGLE_SIGN_IN_STORAGE_KEY = "@virtualline:google-sign-in"
+const GOOGLE_SIGN_IN_STORAGE_KEY = "@virtualline:google-sign-in";
 
 const _cacheGoogleSignIn = async (data) => {
   await AsyncStorage.setItem(GOOGLE_SIGN_IN_STORAGE_KEY, JSON.stringify(data));
-}
+};
 
 const _getCachedGoogleSignIn = async () => {
   try {
@@ -76,6 +97,6 @@ const _getCachedGoogleSignIn = async () => {
   } catch (error) {
     return null;
   }
-}
+};
 
 export { isSignedIn, performGoogleSignIn };

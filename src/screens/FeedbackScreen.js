@@ -7,6 +7,7 @@ import CustomCheckBox from "../components/CustomCheckBox";
 
 import colors from "../constants/colors";
 import texts from "../constants/texts";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function FeedbackScreen({ navigation }) {
   const [checkboxes, setCheckboxes] = useState([
@@ -21,6 +22,9 @@ export default function FeedbackScreen({ navigation }) {
     let newValues = checkboxes;
     newValues[index] = newValue;
     setCheckboxes([...newValues]);
+    if (index === 4) {
+      navigation.navigate("FeedbackCameraScreen");
+    }
   };
 
   return (
@@ -46,15 +50,19 @@ export default function FeedbackScreen({ navigation }) {
                   value={checkboxes[index]}
                   onChange={(newValue) => onValueChange(newValue, index)}
                 />
-                <Image
-                  source={require("../assets/QR-camera.png")}
-                  style={{
-                    width: 50,
-                    height: 50,
-                    marginTop: 50,
-                    marginLeft: 50,
-                  }}
-                />
+                <TouchableOpacity
+                  onPress={(newValue) => onValueChange(newValue, index)}
+                >
+                  <Image
+                    source={require("../assets/QR-camera.png")}
+                    style={{
+                      width: 50,
+                      height: 50,
+                      marginTop: 50,
+                      marginLeft: 50,
+                    }}
+                  />
+                </TouchableOpacity>
               </View>
             )
           )}
