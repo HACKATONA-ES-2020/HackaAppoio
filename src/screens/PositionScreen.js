@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import colors from "../constants/colors";
 import * as Progress from "react-native-progress";
@@ -7,10 +7,24 @@ import * as Notifications from "expo-notifications";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function PositionScreen({ navigation }) {
+export default function PositionScreen({ navigation, route }) {
+  const { exitQueue, onUpdateObject } = route.params;
+
   const storeName = "Loja";
   const [position, setPosition] = useState(1);
   const [time, setTime] = useState(5);
+
+  useEffect(() => {
+    onUpdateObject.onUpdate = function(newData) {
+      const { positionInQueue, estimatedWaitTime } = newData;
+      setPosition(positionInQueue);
+      setTime(estimatedWaitTime);
+    }
+  }, []);
+
+  async function exitQueuePressed() {
+    await exitQueue();
+  }
 
   function scheduleNotification() {
     Notifications.scheduleNotificationAsync({
@@ -38,8 +52,8 @@ export default function PositionScreen({ navigation }) {
               source={require("../assets/time.png")}
               style={{
                 alignSelf: "center",
-                width: 400,
-                height: 280,
+                width: 200,
+                height: 140,
                 marginTop: 30,
                 marginBottom: 30,
               }}
@@ -50,7 +64,7 @@ export default function PositionScreen({ navigation }) {
             </Text>
             <Button
               text="Sair da fila"
-              // TODO onPress
+              onPress={exitQueuePressed}
             />
           </>
           <Progress.Bar
@@ -61,6 +75,7 @@ export default function PositionScreen({ navigation }) {
             borderRadius={50}
             animationConfig={{ bounciness: 50 }}
             animationType={"timing"}
+            style={{ marginTop: 10 }}
           />
         </View>
       ) : (
@@ -71,8 +86,8 @@ export default function PositionScreen({ navigation }) {
               source={require("../assets/celebration.png")}
               style={{
                 alignSelf: "center",
-                width: 400,
-                height: 300,
+                width: 200,
+                height: 150,
                 marginTop: 30,
                 marginBottom: 30,
               }}

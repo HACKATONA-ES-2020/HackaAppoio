@@ -2,7 +2,6 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 import { firebaseConfig } from "./configs";
 import { getUserId } from "./authentication";
-import { call } from "react-native-reanimated";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -14,6 +13,12 @@ const __setUserId = async () => {
     CURRENT_USER_ID = await getUserId();
   }
 };
+
+const lastIndexWhere = (array, predicate) => {
+  const index = array.slice().reverse().findIndex(predicate);
+  const count = array.length - 1;
+  return index >= 0 ? count - index : index;
+}
 
 const dbh = firebase.firestore();
 
@@ -29,6 +34,25 @@ export async function processQRCode(establishmentId) {
     id: snapshot.id,
     name: data.name,
   };
+}
+
+function updateWaitTimes(queue, baseTime) {
+  const result = queue.slice();
+
+  for (let i = 0; i < result.length; i++) {
+    const current = result[i];
+
+    if (i !== 0) {
+      const previous = result[i - 1];
+      const prevWaitTime = previous.estimatedWaitTime ?? 0;
+      const prevTime = (previous.people ?? 0) * 20;
+      current.estimatedWaitTime = prevWaitTime + prevTime;
+    } else {
+      current.estimatedWaitTime = baseTime;
+    }
+  }
+
+  return result;
 }
 
 export async function joinQueue(
@@ -50,29 +74,29 @@ export async function joinQueue(
     userId: CURRENT_USER_ID,
   };
 
+  const queue = data.queue.slice();
+  
+
   // push to data.queue, on the proper position
   if (priority) {
-    let index = data.queue.findIndex((val) => val.priority === true) - 1;
-    if (index < 0) {
-      index = 0;
+    let lastIndex = lastIndexWhere(queue, val => val.priority === true) + 1;
+    if (lastIndex < 0) {
+      lastIndex = 0;
     }
 
-    const peopleInQueueBefore = data.queue.reduce((a, b) => a + b.people, 0);
-    const waitTime = data.usedCapacity * 15 + peopleInQueueBefore * 30;
-    queueObject.estimatedWaitTime = waitTime;
-    data.queue.splice(index, 0, queueObject);
+    queue.splice(lastIndex, 0, queueObject);
   } else {
-    const waitTime = data.usedCapacity * 15 + data.peopleInQueue * 30;
-    queueObject.estimatedWaitTime = waitTime;
-    data.queue.push(queueObject);
+    queue.push(queueObject);
   }
 
-  // increment peopleInQueue by people
-  data.peopleInQueue += people;
+  data.queue = updateWaitTimes(queue, data.usedCapacity * 10);
+
+  const peopleInQueue = data.queue.reduce((acc, curr) => acc + curr.people, 0);
+  data.peopleInQueue = peopleInQueue;
 
   // update doc
   await dbh
-    .collection("establishment")
+    .collection("establishments")
     .doc(establishmentId)
     .set(data, {
       mergeFields: ["peopleInQueue", "queue"],
@@ -123,12 +147,12 @@ export async function enterEstablishment(establishmentId) {
   // update data.peopleInQueue
   data.peopleInQueue -= queueObject.people;
 
-  // update remaining entries on data.queue (estimatedWaitingTime)
+  // update remaining entries on data.queue (estimatedWaitTime)
   data.queue.forEach((val, index, array) => {
     const queueBefore = array.slice(0, index);
     const peopleInQueueBefore = queueBefore.reduce((a, b) => a + b.people, 0);
     const waitTime = data.usedCapacity * 15 + peopleInQueueBefore * 30;
-    val.estimatedWaitingTime = waitTime;
+    val.estimatedWaitTime = waitTime;
   });
 
   // send updated list to firebase
