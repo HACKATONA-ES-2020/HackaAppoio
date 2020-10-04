@@ -1,16 +1,18 @@
 export default colors = {
-  primary: "#FF4F39",
+  primary: "#1BC3DD",
+  complementary_primary: "#F50057",
 
   green: "#48D946",
   yellow: "#FFCC00",
   gray: "#D8D6D6",
+  darkGrey: "#4D4D4D",
 
   text: "#111111",
   textDisabled: "#4F4F4F",
   textPlaceHolder: "#989898",
   textWhite: "#FFFFFF",
 
-  background: "#FDFDFD",
+  background: "#fff",
   backgroundDisabled: "#DEDEDE",
   backgroundItem: "#F0F0F0",
 

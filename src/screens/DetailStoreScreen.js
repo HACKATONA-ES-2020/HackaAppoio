@@ -6,21 +6,16 @@ import Header from "../components/HeaderComponent";
 import ButtonQRCode from "../components/ButtonQRCode";
 import CustomProgressBar from "../components/CustomProgressBar";
 
-export default function DetailStoreScreen() {
+export default function DetailStoreScreen(prevent) {
   return (
     <View style={styles.screen}>
       <Header imagePath={require("../assets/cassio.png")}>ModelScreen</Header>
       <View style={styles.content}>
         <Text style={styles.listItem}>Centauro</Text>
-        <View style={styles.button}></View>
-        <ButtonQRCode
-          imagePath={require("../../assets/logo.png")}
-          onPress={() => onPress}
-        ></ButtonQRCode>
         <Text style={styles.info}>
-          <Text>Av. Bento Gonçalves </Text>
+          <Text>Av. Bento Gonçalves, 4431 </Text>
         </Text>
-        <Text style={styles.imagetext}>Imagens do Local</Text>
+        <Text style={styles.imagetext}>Imagens do local</Text>
 
         <Text style={styles.imagetext}>Status</Text>
 
@@ -31,6 +26,30 @@ export default function DetailStoreScreen() {
           height={18}
           width={280}
         />
+        <Text style={styles.imagetext}>Medidas preventivas</Text>
+        <Image
+          style={{ paddingLeft: 2, paddingTop: 2 }}
+          source={require("../../assets/check-square.png")}
+        />
+        <Image
+          style={{ paddingLeft: 2, paddingTop: 2 }}
+          source={require("../../assets/check-square.png")}
+        />
+        <Image
+          style={{ paddingLeft: 2, paddingTop: 2 }}
+          source={require("../../assets/square.png")}
+        />
+        <Image
+          style={{ paddingLeft: 2, paddingTop: 2 }}
+          source={require("../../assets/check-square.png")}
+        />
+      </View>
+      <View>
+        <View style={styles.button}></View>
+        <ButtonQRCode
+          imagePath={require("../../assets/logo.png")}
+          onPress={() => onPress}
+        ></ButtonQRCode>
       </View>
     </View>
   );
@@ -65,9 +84,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: colors.text,
     fontWeight: "bold",
+    alignContent: "space-between",
     fontSize: 20,
-    color: colors.text,
-    fontWeight: "bold",
     marginTop: 10,
     paddingLeft: 2,
     paddingBottom: 2,
