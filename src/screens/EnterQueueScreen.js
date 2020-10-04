@@ -117,9 +117,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 10,
     paddingHorizontal: 30,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.complementary_primary,
   },
   selected: {
-    backgroundColor: colors.selected,
+    backgroundColor: colors.complementary_primary,
   },
 });

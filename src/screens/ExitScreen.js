@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import colors from "../constants/colors";
 
 import Header from "../components/HeaderComponent";
@@ -17,6 +17,16 @@ export default function PositionScreen({ navigation }) {
         </Text>
 
         <View>
+          <Image
+            source={require("../assets/exit.png")}
+            style={{
+              alignSelf: 'center',
+              width: 400,
+              height: 300,
+              marginTop: 30,
+              marginBottom: 30
+            }}
+          />
           <Text style={styles.description}>
             Ao sair, pressione o botão abaixo para confirmar a sua visita
           </Text>
@@ -63,11 +73,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   name: {
-    color: colors.primary,
+    color: colors.complementary_primary,
     fontWeight: "bold",
   },
   description: {
-    marginTop: 20,
+    marginTop: 10,
     textAlign: "center",
     fontSize: 25,
     color: colors.textDisabled,

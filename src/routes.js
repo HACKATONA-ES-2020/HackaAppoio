@@ -17,19 +17,20 @@ export function Screens() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ExitScreen" component={ExitScreen} />
+      <Stack.Screen name="PositionScreen" component={PositionScreen} />
+      <Stack.Screen name="EnterQueueScreen" component={EnterQueueScreen} />
+      <Stack.Screen name="ConfirmedFeedback" component={ConfirmedFeedback} />
         <Stack.Screen
           name="QRCodeReaderScreen"
           component={QRCodeReaderScreen}
         />
-        <Stack.Screen name="EnterQueueScreen" component={EnterQueueScreen} />
-        <Stack.Screen name="PositionScreen" component={PositionScreen} />
         <Stack.Screen
           name="QRCodeGeneratorUserScreen"
           component={QRCodeGeneratorUserScreen}
         />
-        <Stack.Screen name="ExitScreen" component={ExitScreen} />
         <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
-        <Stack.Screen name="ConfirmedFeedback" component={ConfirmedFeedback} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
