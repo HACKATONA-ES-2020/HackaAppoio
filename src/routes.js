@@ -11,7 +11,7 @@ export function Screens() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="ModelScreen" component={ModelScreen} /> */}
+        <Stack.Screen name="ModelScreen" component={ModelScreen} />
         <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
       </Stack.Navigator>
     </NavigationContainer>
