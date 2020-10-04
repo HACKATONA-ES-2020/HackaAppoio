@@ -5,57 +5,64 @@ import colors from "../constants/colors";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function EnterQueue({ route, navigation }) {
+export default function EnterQueue({ navigation }) {
   const [preferencial, setPreferencial] = useState(false);
   const [guestNumber, setGuestNumber] = useState(1);
   const storeName = "Loja";
   return (
     <View style={styles.screen}>
-      <Header imagePath={require("../assets/cassio.png")}>ModelScreen</Header>
+      <Header imagePath={require("../assets/cassio.png")} />
       <View style={styles.content}>
         <Text style={styles.title}>
           Você está prestes a entrar na fila da{" "}
           <Text style={styles.name}>{storeName}</Text>
         </Text>
 
-        <Text style={styles.question}>Quantas pessoas estão no seu grupo?</Text>
+        <View style={styles.questions}>
+          <Text style={styles.question}>
+            Quantas pessoas estão no seu grupo?
+          </Text>
 
-        <View style={styles.buttons}>
-          <Button
-            text="-"
-            type={guestNumber > 1 ? "secondary" : "disabled"}
-            onPress={() => setGuestNumber(guestNumber - 1)}
-            style={styles.incrementer}
-          />
+          <View style={styles.buttons}>
+            <Button
+              text="-"
+              type={guestNumber > 1 ? "secondary" : "disabled"}
+              onPress={() => setGuestNumber(guestNumber - 1)}
+              style={styles.incrementer}
+            />
 
-          <Text style={styles.guestNumber}>{guestNumber}</Text>
-          <Button
-            text="+"
-            type="secondary"
-            onPress={() => setGuestNumber(guestNumber + 1)}
-            style={styles.incrementer}
-          />
+            <Text style={styles.guestNumber}>{guestNumber}</Text>
+            <Button
+              text="+"
+              type="secondary"
+              onPress={() => setGuestNumber(guestNumber + 1)}
+              style={styles.incrementer}
+            />
+          </View>
+
+          <Text style={styles.question}>
+            Há alguém que precise de fila preferencial?
+          </Text>
+          <View style={styles.buttons}>
+            <Button
+              text="   Sim   "
+              type={!preferencial && "secondary"}
+              style={preferencial && styles.selected}
+              onPress={() => setPreferencial(true)}
+            />
+
+            <Button
+              text="   Não   "
+              type={preferencial && "secondary"}
+              style={!preferencial && styles.selected}
+              onPress={() => setPreferencial(false)}
+            />
+          </View>
         </View>
-
-        <Text style={styles.question}>
-          Há alguém que precise de fila preferencial?
-        </Text>
-        <View style={styles.buttons}>
-          <Button
-            text="   Sim   "
-            type={!preferencial && "secondary"}
-            style={preferencial && styles.selected}
-            onPress={() => setPreferencial(true)}
-          />
-
-          <Button
-            text="   Não   "
-            type={preferencial && "secondary"}
-            style={!preferencial && styles.selected}
-            onPress={() => setPreferencial(false)}
-          />
-        </View>
-        <Button text="Entrar na fila" />
+        <Button
+          text="Entrar na fila"
+          onPress={() => navigation.navigate("PositionScreen")}
+        />
       </View>
     </View>
   );
@@ -94,6 +101,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: colors.text,
     fontWeight: "bold",
+  },
+  questions: {
+    justifyContent: "space-evenly",
+    flex: 1,
   },
   incrementer: {
     borderRadius: 100,

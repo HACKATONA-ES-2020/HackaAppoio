@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text } from "react-native";
 import Header from "../components/HeaderComponent";
 
 import Button from "../components/ButtonComponent";
@@ -9,31 +9,37 @@ import colors from "../constants/colors";
 export default function ConfirmedFeedback() {
   return (
     <View style={styles.screen}>
-      <Header imagePath={require("../assets/cassio.png")}>FeedbackScreen</Header>
+      <Header imagePath={require("../assets/cassio.png")}>
+        FeedbackScreen
+      </Header>
       {/* TODO: pegar foto do firebase */}
-      <ScrollView style={styles.content}>
-        <View style={styles.titleContainer}>
-          <Image source={require("../assets/green-check.png")} style={{ alignSelf: 'center', width: 110, height: 110, marginTop: 10 }} />
-          <Text style={styles.title}>
-            Obrigado pelo feedback!
-          </Text>
+      <View style={styles.content}>
+        <View>
+          <Image
+            source={require("../assets/green-check.png")}
+            style={styles.image}
+          />
+          <Text style={styles.title}>Obrigado pelo feedback!</Text>
 
           <Text style={styles.title}>
-            E por estar usando máscara, você ganhou <Text style={styles.span}>100</Text> pontos!
+            E por estar usando máscara, você ganhou{" "}
+            <Text style={styles.span}>100</Text> pontos!
           </Text>
         </View>
-        <Button text="Continuar" style={{ marginTop: 80 }} />
-      </ScrollView>
+        <Button text="Voltar ao início" style={{ marginTop: 80 }} />
+      </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  content: {
-    padding: 20,
-  },
   screen: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  content: {
+    padding: 20,
+    justifyContent: "space-between",
+    flex: 1,
   },
   title: {
     alignItems: "center",
@@ -42,14 +48,15 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop: 50,
-    marginBottom: 50,
-    color: colors.darkGrey
+    color: colors.darkGrey,
   },
-  titleContainer: {
-    marginBottom: 80
-  },
+
   span: {
-    color: colors.green
-  }
+    color: colors.green,
+  },
+  image: {
+    alignSelf: "center",
+    width: 110,
+    height: 110,
+  },
 });
