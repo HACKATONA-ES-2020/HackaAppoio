@@ -6,9 +6,13 @@ export default function CheckedItem({ checked, text }) {
   return (
     <View style={styles.component}>
       {checked ? (
-        <Icon name={"check-square"} color={colors.secondary} size={30} />
+        <Icon
+          name={"check-square"}
+          color={colors.complementary_primary}
+          size={30}
+        />
       ) : (
-        <Icon name={"square"} color={colors.secondary} size={30} />
+        <Icon name={"square"} color={colors.complementary_primary} size={30} />
       )}
       <Text style={styles.text}>{text}</Text>
     </View>
