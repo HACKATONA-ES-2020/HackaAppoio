@@ -41,5 +41,8 @@ const styles = StyleSheet.create({
     borderRadius: 165,
     borderWidth: 35,
     borderColor: colors.primary,
+    position: "absolute",
+    right: 0,
+    bottom: 20,
   },
 });
