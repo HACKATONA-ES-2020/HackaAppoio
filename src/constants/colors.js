@@ -1,5 +1,6 @@
 export default colors = {
-  primary: "#FF4F39",
+  primary: "#1BC3DD",
+  complementary_primary: "#F50057",
 
   green: "#48D946",
   yellow: "#FFCC00",
@@ -11,7 +12,7 @@ export default colors = {
   textPlaceHolder: "#989898",
   textWhite: "#FFFFFF",
 
-  background: "#FDFDFD",
+  background: "#fff",
   backgroundDisabled: "#DEDEDE",
   backgroundItem: "#F0F0F0",
 
