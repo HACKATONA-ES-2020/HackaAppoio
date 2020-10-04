@@ -13,7 +13,6 @@ export default function HomeScreen({ navigation }) {
     (async () => {
       const data = await getEstablishments();
       setEstablishments(data);
-      // console.log(establishments);
     })();
   }, []);
 

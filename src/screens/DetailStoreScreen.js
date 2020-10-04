@@ -75,7 +75,7 @@ export default function DetailStoreScreen({ navigation, route }) {
       </View>
       <ButtonQRCode
         imagePath={require("../../assets/logo.png")}
-        onPress={(e) => navigation.navigate("EnterQueueScreen")}
+        onPress={(e) => navigation.navigate("EnterQueueScreen", { establishment })}
       ></ButtonQRCode>
     </View>
   );
