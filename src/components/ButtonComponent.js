@@ -7,7 +7,12 @@ import colors from "../constants/colors";
 // - primary (valor padrão): fundo laranja e texto branco
 // - secondary: fundo branco e texto laranja
 // - disabled: cinza
-export default function ButtonComponent({ text, type = "primary", onPress, style }) {
+export default function ButtonComponent({
+  text,
+  type = "primary",
+  onPress,
+  style,
+}) {
   let touchableStyle = {};
   let textStyle = {};
 
@@ -23,7 +28,11 @@ export default function ButtonComponent({ text, type = "primary", onPress, style
   }
 
   return (
-    <TouchableOpacity style={[styles.touchable, touchableStyle, style]} onPress={onPress} disabled={type === "disabled"}>
+    <TouchableOpacity
+      style={[styles.touchable, touchableStyle, style]}
+      onPress={onPress}
+      disabled={type === "disabled"}
+    >
       <Text style={[styles.text, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
@@ -36,10 +45,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 8,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   touchablePrimary: {
-    backgroundColor: colors.primary
+    backgroundColor: colors.primary,
   },
   touchableSecondary: {
     backgroundColor: colors.textWhite,
@@ -50,19 +59,19 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
   },
   touchableDisabled: {
-    backgroundColor: colors.backgroundDisabled
+    backgroundColor: colors.backgroundDisabled,
   },
   text: {
     fontSize: 25,
-    fontWeight: Platform.OS === "android" ? "bold" : "600"
+    fontWeight: Platform.OS === "android" ? "bold" : "600",
   },
   textPrimary: {
     color: colors.textWhite,
   },
   textSecondary: {
-    color: colors.primary,
+    color: colors.complementary_primary,
   },
   textDisabled: {
     color: colors.textWhite,
-  }
+  },
 });

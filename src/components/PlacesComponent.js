@@ -10,28 +10,35 @@ export default function ModelComponent({
   discount,
   dindin,
   queue,
-  title, progress, status
+  title,
+  progress,
+  status,
+  onPress,
 }) {
   return (
-    <TouchableOpacity style={styles.component}>
+    <TouchableOpacity style={styles.component} onPress={onPress}>
       <View style={styles.flex}>
         <Text style={styles.title}>{text}</Text>
         <Text style={styles.queue}>{queue}</Text>
       </View>
 
+      <View style={styles.flex}>
+        <Text style={styles.adress}>{adress}</Text>
+        <Text style={styles.queueSize}>{queueSize}</Text>
+      </View>
 
       <View style={styles.flex}>
-      <Text style={styles.adress}>{adress}</Text>
-      <Text style={styles.queueSize}>{queueSize}</Text>
+        <View style={styles.flexx}>
+          <Text style={styles.discount}>{discount}</Text>
+          <Text style={styles.dindin}>{dindin}</Text>
+        </View>
+        <CustomProgressBar
+          title={title}
+          status={status}
+          progress={progress}
+          height={7}
+        />
       </View>
-     
-      <View style={styles.flex}>
-      <View style={styles.flexx}>
-      <Text style={styles.discount}>{discount}</Text>
-        <Text style={styles.dindin}>{dindin}</Text>
-        </View>
-        <CustomProgressBar title={title} status={status} progress={progress} height={7} />
-        </View>
     </TouchableOpacity>
   );
 }
@@ -82,7 +89,7 @@ const styles = StyleSheet.create({
   },
 
   dindin: {
-    color: colors.secondary,
+    color: colors.complementary_primary,
     justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
@@ -93,10 +100,9 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     alignItems: "center",
     justifyContent: "center",
-    color: colors.secondary,
+    color: colors.complementary_primary,
     fontSize: 36,
     fontWeight: "bold",
-    
   },
   queueSize: {
     color: colors.textAdress,

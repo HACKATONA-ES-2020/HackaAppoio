@@ -5,7 +5,7 @@ import colors from "../constants/colors";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function EnterQueue({ route, navigation }) {
+export default function EnterQueue({ navigation }) {
   const [preferencial, setPreferencial] = useState(false);
   const [guestNumber, setGuestNumber] = useState(1);
   const storeName = "Loja";
@@ -18,44 +18,51 @@ export default function EnterQueue({ route, navigation }) {
           <Text style={styles.name}>{storeName}</Text>
         </Text>
 
-        <Text style={styles.question}>Quantas pessoas estão no seu grupo?</Text>
+        <View style={styles.questions}>
+          <Text style={styles.question}>
+            Quantas pessoas estão no seu grupo?
+          </Text>
 
-        <View style={styles.buttons}>
-          <Button
-            text="-"
-            type={guestNumber > 1 ? "secondary" : "disabled"}
-            onPress={() => setGuestNumber(guestNumber - 1)}
-            style={styles.incrementer}
-          />
+          <View style={styles.buttons}>
+            <Button
+              text="-"
+              type={guestNumber > 1 ? "secondary" : "disabled"}
+              onPress={() => setGuestNumber(guestNumber - 1)}
+              style={styles.incrementer}
+            />
 
-          <Text style={styles.guestNumber}>{guestNumber}</Text>
-          <Button
-            text="+"
-            type="secondary"
-            onPress={() => setGuestNumber(guestNumber + 1)}
-            style={styles.incrementer}
-          />
+            <Text style={styles.guestNumber}>{guestNumber}</Text>
+            <Button
+              text="+"
+              type="secondary"
+              onPress={() => setGuestNumber(guestNumber + 1)}
+              style={styles.incrementer}
+            />
+          </View>
+
+          <Text style={styles.question}>
+            Há alguém que precise de fila preferencial?
+          </Text>
+          <View style={styles.buttons}>
+            <Button
+              text="   Sim   "
+              type={!preferencial && "secondary"}
+              style={preferencial && styles.selected}
+              onPress={() => setPreferencial(true)}
+            />
+
+            <Button
+              text="   Não   "
+              type={preferencial && "secondary"}
+              style={!preferencial && styles.selected}
+              onPress={() => setPreferencial(false)}
+            />
+          </View>
         </View>
-
-        <Text style={styles.question}>
-          Há alguém que precise de fila preferencial?
-        </Text>
-        <View style={styles.buttons}>
-          <Button
-            text="   Sim   "
-            type={!preferencial && "secondary"}
-            style={preferencial && styles.selected}
-            onPress={() => setPreferencial(true)}
-          />
-
-          <Button
-            text="   Não   "
-            type={preferencial && "secondary"}
-            style={!preferencial && styles.selected}
-            onPress={() => setPreferencial(false)}
-          />
-        </View>
-        <Button text="Entrar na fila" />
+        <Button
+          text="Entrar na fila"
+          onPress={() => navigation.navigate("PositionScreen")}
+        />
       </View>
     </View>
   );
@@ -95,6 +102,10 @@ const styles = StyleSheet.create({
     color: colors.text,
     fontWeight: "bold",
   },
+  questions: {
+    justifyContent: "space-evenly",
+    flex: 1,
+  },
   incrementer: {
     borderRadius: 100,
   },
@@ -106,9 +117,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     padding: 10,
     paddingHorizontal: 30,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.complementary_primary,
   },
   selected: {
-    backgroundColor: colors.selected,
+    backgroundColor: colors.complementary_primary,
   },
 });

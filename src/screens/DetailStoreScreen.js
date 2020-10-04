@@ -8,7 +8,7 @@ import CustomProgressBar from "../components/CustomProgressBar";
 import CheckedItem from "../components/CheckedItem";
 import { color } from "react-native-reanimated";
 
-export default function DetailStoreScreen({ prevent }) {
+export default function DetailStoreScreen({ navigation }) {
   const alcool = false;
   const distanciamento = false;
   const mascara = false;
@@ -82,7 +82,7 @@ export default function DetailStoreScreen({ prevent }) {
       </View>
       <ButtonQRCode
         imagePath={require("../../assets/logo.png")}
-        onPress={() => onPress}
+        onPress={(e) => navigation.navigate("EnterQueueScreen")}
       ></ButtonQRCode>
     </View>
   );
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   info: {
-    color: colors.secondary,
+    color: colors.complementary_primary,
     fontWeight: "bold",
     fontSize: 17,
   },
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   number: {
-    color: colors.secondary,
+    color: colors.complementary_primary,
     textAlign: "right",
     fontWeight: "bold",
     fontSize: 50,

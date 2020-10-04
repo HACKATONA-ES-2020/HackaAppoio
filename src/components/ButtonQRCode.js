@@ -20,7 +20,6 @@ import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import colors from "../constants/colors";
 
 export default function ButtonQRCode({ background, imagePath, onPress }) {
-  onPress = () => {};
   return (
     <TouchableOpacity
       onPress={onPress}
