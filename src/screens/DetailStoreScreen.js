@@ -99,7 +99,4 @@ const styles = StyleSheet.create({
     paddingLeft: 2,
     paddingBottom: 2,
   },
-  input: {
-    flexDirection: "row",
-  },
 });

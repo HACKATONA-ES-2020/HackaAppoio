@@ -1,6 +1,11 @@
 export default colors = {
+<<<<<<< HEAD
   primary: "#1BC3DD",
   complementary_primary: "#F50057",
+=======
+  primary: "#1bc3dd",
+  secondary: "#f50057",
+>>>>>>> 308767cabcc1004884686714c3296c8a45a80d97
 
   green: "#48D946",
   yellow: "#FFCC00",
@@ -10,7 +15,11 @@ export default colors = {
   text: "#111111",
   textDisabled: "#4F4F4F",
   textPlaceHolder: "#989898",
-  textWhite: "#FFFFFF",
+  textBlack: "#000000",
+  textPlace: "#4c4c4c",
+  textAdress: "#b2b2b2",
+  moneyShown:"#48d946",
+  sizeAndLocation:"#838383",
 
   background: "#fff",
   backgroundDisabled: "#DEDEDE",

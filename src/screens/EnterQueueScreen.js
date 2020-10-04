@@ -11,7 +11,7 @@ export default function EnterQueue({ route, navigation }) {
   const storeName = "Loja";
   return (
     <View style={styles.screen}>
-      <Header imagePath={require("../assets/cassio.png")}>ModelScreen</Header>
+      <Header imagePath={require("../assets/cassio.png")} />
       <View style={styles.content}>
         <Text style={styles.title}>
           Você está prestes a entrar na fila da{" "}
