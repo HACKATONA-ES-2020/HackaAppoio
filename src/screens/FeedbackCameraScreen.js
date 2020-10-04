@@ -2,23 +2,28 @@ import React, { useState, useEffect, useRef } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { Camera } from "expo-camera";
 import { uploadImage } from "../api";
+import ButtonComponent from "../components/ButtonComponent";
 
 export default function FeedbackCameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
+
   const [type, setType] = useState(Camera.Constants.Type.back);
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
   }, []);
+
   if (hasPermission === null) {
     return <View />;
   }
   if (hasPermission === false) {
     return <Text>Sem acesso à câmera.</Text>;
   }
+
   return (
     <View style={{ flex: 1 }}>
       <Camera
@@ -35,11 +40,9 @@ export default function FeedbackCameraScreen({ navigation }) {
             justifyContent: "flex-end",
           }}
         >
-          <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: "flex-end",
-            }}
+          <ButtonComponent
+            text="Inverter"
+            style={{ alignSelf: "center", margin: 20 }}
             onPress={() => {
               setType(
                 type === Camera.Constants.Type.back
@@ -47,14 +50,9 @@ export default function FeedbackCameraScreen({ navigation }) {
                   : Camera.Constants.Type.back
               );
             }}
-          >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-              {" "}
-              Inverter{" "}
-            </Text>
-          </TouchableOpacity>
+          />
           <TouchableOpacity
-            style={{ alignSelf: "center" }}
+            style={{ alignSelf: "center", marginBottom: 10 }}
             onPress={async () => {
               if (cameraRef) {
                 let photo = await cameraRef.takePictureAsync();
