@@ -16,19 +16,17 @@ export default function ConfirmedFeedback() {
       <ScrollView style={styles.content}>
         <View style={{ justifyContent: "space-between" }}>
           <View>
-            <Image
-              source={require("../assets/green-check.png")}
-              style={styles.image}
-            />
-            <Text style={styles.title}><Text style={styles.span}>Obrigado</Text> pelo feedback!</Text>
+            <Text style={styles.title}>
+              <Text style={styles.span}>Obrigado</Text> pelo feedback!
+            </Text>
             <Image
               source={require("../assets/thank_you.png")}
               style={{
-                alignSelf: 'center',
+                alignSelf: "center",
                 width: 280,
                 height: 280,
                 marginTop: 10,
-                marginBottom: 10
+                marginBottom: 10,
               }}
             />
             <Text style={styles.title}>
