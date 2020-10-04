@@ -30,7 +30,6 @@ export default function BarcodeCamera({ onChange }) {
   const QRCodeScanned = ({ data }) => {
     setCodeScanned(true);
     onChange(data);
-    alert(data);
   };
 
   return (
