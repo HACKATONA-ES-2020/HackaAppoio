@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 import { firebaseConfig } from "./configs";
 import { getUserId } from "./authentication";
+import { call } from "react-native-reanimated";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -88,6 +89,8 @@ export async function joinQueue(
   callback
 ) {
   await __setUserId();
+
+  console.warn(establishmentId, people, priority, callback);
 
   const snapshot = await dbh
     .collection("establishments")
@@ -186,7 +189,9 @@ export async function enterEstablishment(establishmentId) {
 }
 export async function getEstablishments() {
   const snapshot = await dbh.collection("establishments").get();
-  const data = snapshot.docs.map((d) => d.data());
+  const data = snapshot.docs.map((doc) => {
+    return { ...doc.data(), id: doc.id };
+  });
   return data;
 }
 
