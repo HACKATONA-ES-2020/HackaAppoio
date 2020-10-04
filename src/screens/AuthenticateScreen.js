@@ -33,9 +33,24 @@ export default function AuthenticateScreen({ navigation }) {
       <View style={styles.header}>
         <Image
           style={styles.image}
-          source={require("../assets/header-large.png")}
+          source={require("../assets/logo.png")}
+          style={{
+            alignSelf: 'center',
+            width: 300,
+            height: 50,
+          }}
         />
       </View>
+      <Image
+        source={require("../assets/line.png")}
+        style={{
+          alignSelf: 'center',
+          width: 400,
+          height: 300,
+          marginTop: 30,
+          marginBottom: 30
+        }}
+      />
       <View style={styles.buttonsContainer}>
         <SocialButtonComponent
           type="google"
@@ -50,6 +65,7 @@ export default function AuthenticateScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.background
   },
   header: {
     width: "100%",
