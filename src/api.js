@@ -184,6 +184,11 @@ export async function enterEstablishment(establishmentId) {
     .doc(establishmentId)
     .set(data, { mergeFields: ["queue", "peopleInQueue", "usedCapacity"] });
 }
+export async function getEstablishments() {
+  const snapshot = await dbh.collection("establishments").get();
+  const data = snapshot.docs.map((d) => d.data());
+  return data;
+}
 
 export async function getQRCodeInfo() {
   await __setUserId();

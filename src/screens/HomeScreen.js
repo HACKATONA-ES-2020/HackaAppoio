@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 import colors from "../constants/colors";
 import Header from "../components/HeaderComponent";
 import ButtonQRCode from "../components/ButtonQRCode";
 import PlacesComponent from "../components/PlacesComponent";
+import { getEstablishments } from "../api";
 
 export default function HomeScreen({ navigation }) {
+  const [establishments, setEstablishments] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getEstablishments();
+      setEstablishments(data);
+      console.log(establishments);
+    })();
+  }, []);
+
   return (
     <View style={styles.screen}>
       <Header imagePath={require("../assets/cassio.png")}>ModelScreen</Header>
@@ -15,55 +26,29 @@ export default function HomeScreen({ navigation }) {
             Você tem <Text style={styles.points}> 432 </Text> pontos
           </Text>
           <Text style={styles.nextStores}>{"Lojas próximas"}</Text>
-          <PlacesComponent
-            text="Centauro "
-            onPress={(e) => navigation.navigate("DetailStoreScreen")}
-            adress="Av. Bento Gonçalves, 4431"
-            discount="Desconto de até "
-            dindin="R$20,00"
-            queue="7"
-            queueSize="Tamanho da fila"
-            progress={0.7}
-            status="bad"
-            title="Lotação: 70%"
-          />
-
-          <PlacesComponent
-            text="Paquetá Esportes"
-            adress="Av. Bento Gonçalves, 4431"
-            discount="Desconto de até "
-            dindin="R$15,00"
-            queue="3"
-            queueSize="Tamanho da fila"
-            progress={0.2}
-            status="good"
-            title="Lotação: 20%"
-          />
-          <Text style={styles.nextRestaurants}>
-            {" "}
-            {"Restaurantes próximos"}{" "}
-          </Text>
-          <PlacesComponent
-            text="Bar do 32"
-            adress="Av. Ipiranga, 6681, P32"
-            discount="Sem descontos"
-            queue="32"
-            queueSize="Tamanho da fila"
-            progres={0.5}
-            status="attention"
-            title="Lotação: 50%"
-          />
-          <PlacesComponent
-            text="Palatu's"
-            adress="Av. Bento Gonçalves, 4431"
-            discount="Desconto de até "
-            dindin="R$50,00"
-            queue="14"
-            queueSize="Tamanho da fila"
-            progress={0.2}
-            status="good"
-            title="Lotação: 20%"
-          />
+          {establishments.map((item, index) => {
+            return (
+              <PlacesComponent
+                key={index}
+                text={item.name}
+                onPress={(e) =>
+                  navigation.navigate("DetailStoreScreen", {
+                    establishment: item,
+                  })
+                }
+                address={item.address}
+                discount={item.maxDiscounts}
+                queueSize={item.peopleInQueue}
+                progress={item.usedCapacity / item.capacity}
+                status={
+                  (item.usedCapacity / item.capacity < 0.3 && "good") ||
+                  (item.usedCapacity / item.capacity < 0.6 && "attention") ||
+                  (item.usedCapacity / item.capacity < 1 && "bad")
+                }
+                title={(item.usedCapacity / item.capacity) * 100}
+              />
+            );
+          })}
         </View>
       </ScrollView>
       <ButtonQRCode

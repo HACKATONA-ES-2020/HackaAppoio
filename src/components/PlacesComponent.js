@@ -5,11 +5,9 @@ import colors from "../constants/colors";
 import CustomProgressBar from "./CustomProgressBar";
 export default function ModelComponent({
   text,
-  adress,
+  address,
   queueSize,
   discount,
-  dindin,
-  queue,
   title,
   progress,
   status,
@@ -19,21 +17,21 @@ export default function ModelComponent({
     <TouchableOpacity style={styles.component} onPress={onPress}>
       <View style={styles.flex}>
         <Text style={styles.title}>{text}</Text>
-        <Text style={styles.queue}>{queue}</Text>
+        <Text style={styles.queue}>{queueSize}</Text>
       </View>
 
       <View style={styles.flex}>
-        <Text style={styles.adress}>{adress}</Text>
-        <Text style={styles.queueSize}>{queueSize}</Text>
+        <Text style={styles.address}>{address}</Text>
+        <Text style={styles.queueSize}>Pessoas na fila</Text>
       </View>
 
       <View style={styles.flex}>
         <View style={styles.flexx}>
-          <Text style={styles.discount}>{discount}</Text>
-          <Text style={styles.dindin}>{dindin}</Text>
+          <Text style={styles.discount}>Descontos de até</Text>
+          <Text style={styles.dindin}>R$ {discount}.00</Text>
         </View>
         <CustomProgressBar
-          title={title}
+          title={title + "% da lotação"}
           status={status}
           progress={progress}
           height={7}
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginTop: -15,
   },
-  adress: {
+  address: {
     color: colors.textAdress,
     fontWeight: "bold",
     justifyContent: "center",
