@@ -1,11 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import { QRCode as CustomQRCode } from "react-native-custom-qr-codes-expo";
+import * as Notifications from "expo-notifications";
+import * as Permissions from "expo-permissions";
 import colors from "../constants/colors";
 
 export default function App({ navigation }) {
   const [scanned, setScanned] = useState(false);
+
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+
+  function scheduleNotification(text) {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: `Você ainda está na ${text}?`,
+        body:
+          "Notamos que você não registrou sua saída, entre no app para ganhar seus pontos!",
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+    navigation.navigate("ExitScreen");
+  }
 
   return (
     <View style={styles.screen}>
@@ -25,7 +49,7 @@ export default function App({ navigation }) {
       </View>
       <TouchableOpacity
         style={styles.secretButton}
-        onPress={() => navigation.navigate("ExitScreen")}
+        onPress={() => scheduleNotification("Centauro")}
       >
         <Text style={styles.subtext}>
           Assim seus pontos serão validados! :)

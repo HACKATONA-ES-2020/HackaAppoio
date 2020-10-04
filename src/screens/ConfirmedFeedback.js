@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text, ScrollView } from "react-native";
 import Header from "../components/HeaderComponent";
 
 import Button from "../components/ButtonComponent";
@@ -13,21 +13,32 @@ export default function ConfirmedFeedback() {
         FeedbackScreen
       </Header>
       {/* TODO: pegar foto do firebase */}
-      <View style={styles.content}>
-        <View>
-          <Image
-            source={require("../assets/green-check.png")}
-            style={styles.image}
-          />
-          <Text style={styles.title}>Obrigado pelo feedback!</Text>
-
-          <Text style={styles.title}>
-            E por estar usando máscara, você ganhou{" "}
-            <Text style={styles.span}>100</Text> pontos!
-          </Text>
+      <ScrollView style={styles.content}>
+        <View style={{ justifyContent: "space-between" }}>
+          <View>
+            <Image
+              source={require("../assets/green-check.png")}
+              style={styles.image}
+            />
+            <Text style={styles.title}><Text style={styles.span}>Obrigado</Text> pelo feedback!</Text>
+            <Image
+              source={require("../assets/thank_you.png")}
+              style={{
+                alignSelf: 'center',
+                width: 280,
+                height: 280,
+                marginTop: 10,
+                marginBottom: 10
+              }}
+            />
+            <Text style={styles.title}>
+              E por estar usando máscara, você ganhou{" "}
+              <Text style={styles.span}>100</Text> pontos!
+            </Text>
+          </View>
+          <Button text="Voltar ao início" style={{ marginTop: 50 }} />
         </View>
-        <Button text="Voltar ao início" style={{ marginTop: 80 }} />
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -38,7 +49,6 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
-    justifyContent: "space-between",
     flex: 1,
   },
   title: {
@@ -49,10 +59,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     color: colors.darkGrey,
+    marginTop: 20,
   },
 
   span: {
-    color: colors.green,
+    color: colors.complementary_primary,
   },
   image: {
     alignSelf: "center",

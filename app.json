@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FF4F39"
+      "backgroundColor": "#1BC3DD"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -19,6 +19,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "useNextNotificationsApi": true
     }
   }
 }
