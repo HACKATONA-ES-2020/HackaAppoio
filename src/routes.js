@@ -41,18 +41,17 @@ function Authentication() {
           },
         }}
       />
+      {App()}
     </Stack.Navigator>
   );
 }
 
 function App() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <>
       {/* TODO: adicionar entrada para telas do fluxo 2 quando prontas */}
-      <Stack.Screen
-        name="QRCodeReaderScreen"
-        component={QRCodeReaderScreen}
-      />
+      <Stack.Screen name="HomeScreen" component={ModelScreen} />
+      <Stack.Screen name="QRCodeReaderScreen" component={QRCodeReaderScreen} />
       <Stack.Screen name="EnterQueueScreen" component={EnterQueueScreen} />
       <Stack.Screen name="PositionScreen" component={PositionScreen} />
       <Stack.Screen
@@ -62,7 +61,7 @@ function App() {
       <Stack.Screen name="ExitScreen" component={ExitScreen} />
       <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
       <Stack.Screen name="ConfirmedFeedback" component={ConfirmedFeedback} />
-    </Stack.Navigator>
+    </>
   );
 }
 
@@ -76,13 +75,15 @@ export function Screens() {
     })();
   }, []);
 
-  console.warn("SERASSE", isSignedIn);
-
   return (
     <NavigationContainer>
       {isSignedIn === -1 && Loading()}
       {isSignedIn === false && Authentication()}
-      {isSignedIn === true && App()}
+      {isSignedIn === true && (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {App()}
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }

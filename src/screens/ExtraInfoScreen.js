@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
+import { CommonActions } from "@react-navigation/native";
 import ButtonComponent from "../components/ButtonComponent";
 import colors from "../constants/colors";
 
@@ -24,9 +25,14 @@ function SkipButton({ onPress }) {
 export default function ExtraInfoScreen({ navigation }) {
   const [cpf, setCpf] = useState("");
 
+  const goToHome = () => {
+    navigation.dispatch(
+      CommonActions.reset({ index: 0, routes: [{ name: "HomeScreen" }] })
+    );
+  };
+
   const skipExtraInfo = () => {
-    // TODO: !!
-    console.warn("skip extra info");
+    goToHome();
   };
 
   useLayoutEffect(() => {
@@ -36,8 +42,8 @@ export default function ExtraInfoScreen({ navigation }) {
   }, [navigation]);
 
   const saveCPF = () => {
-    // TODO: !!
-    console.warn("save cpf");
+    // TODO: salvar CPF no Firebase também
+    goToHome();
   };
 
   return (
@@ -58,11 +64,7 @@ export default function ExtraInfoScreen({ navigation }) {
         />
         <View style={styles.spacer} />
         <View style={styles.continueButtonContainer}>
-          <ButtonComponent
-            type="primary"
-            text="Continuar"
-            onPress={saveCPF}
-          />
+          <ButtonComponent type="primary" text="Continuar" onPress={saveCPF} />
         </View>
       </View>
     </TouchableWithoutFeedback>
