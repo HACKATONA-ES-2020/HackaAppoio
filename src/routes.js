@@ -24,10 +24,10 @@ const Stack = createStackNavigator();
 function Authentication() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="FeedbackCameraScreen"
         component={FeedbackCameraScreen}
-      />
+      /> */}
       <Stack.Screen name="Authenticate" component={AuthenticateScreen} />
       <Stack.Screen
         name="ExtraInfo"

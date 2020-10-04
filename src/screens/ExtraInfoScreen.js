@@ -64,7 +64,11 @@ export default function ExtraInfoScreen({ navigation }) {
         />
         <View style={styles.spacer} />
         <View style={styles.continueButtonContainer}>
-          <ButtonComponent type="primary" text="Continuar" onPress={saveCPF} />
+          <ButtonComponent
+            type={cpf.length === 14 ? "primary" : "disabled"}
+            text="Continuar"
+            onPress={saveCPF}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>

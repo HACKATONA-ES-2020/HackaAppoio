@@ -22,7 +22,7 @@ export default function AuthenticateScreen({ navigation }) {
     }
 
     // TODO: mandar user para ExtraInfo quando integraçãom com Firebase for feita
-    console.warn(user);
+    // console.warn(user);
     navigation.dispatch(
       CommonActions.reset({ index: 0, routes: [{ name: "ExtraInfo" }] })
     );

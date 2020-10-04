@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, TextInput, View, Image } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import { getUserInfo } from "../authentication";
 import colors from "../constants/colors";
 
 export default function HeaderComponent({ searchBar, textState, imagePath }) {
+  const [photoUrl, setPhotoUrl] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getUserInfo();
+      setPhotoUrl(data.user.photoUrl);
+    })();
+  }, []);
+
   return (
     <View style={styles.header}>
       {searchBar && (
@@ -18,7 +28,7 @@ export default function HeaderComponent({ searchBar, textState, imagePath }) {
       {!searchBar && (
         <Image style={styles.logo} source={require("../assets/logo.png")} />
       )}
-      <Image style={styles.profile} source={imagePath} />
+      <Image style={styles.profile} source={{ uri: photoUrl }} />
     </View>
   );
 }

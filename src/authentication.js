@@ -83,4 +83,6 @@ const _getCachedGoogleSignIn = async () => {
   }
 }
 
-export { getUserId, isSignedIn, performGoogleSignIn };
+const getUserInfo = () => _getCachedGoogleSignIn();
+
+export { getUserId, isSignedIn, performGoogleSignIn, getUserInfo };

@@ -56,7 +56,7 @@ export default function FeedbackCameraScreen({ navigation }) {
             onPress={async () => {
               if (cameraRef) {
                 let photo = await cameraRef.takePictureAsync();
-                console.log("photo", photo);
+                // console.log("photo", photo);
                 await uploadImage("hacka-appoio", "1.jpg", photo.uri);
               }
               navigation.navigate("ConfirmedFeedback");
