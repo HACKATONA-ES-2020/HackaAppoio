@@ -17,7 +17,7 @@ export default function DetailStoreScreen({ navigation, route }) {
   const higienizado = preventiveMeasures.includes(3);
 
   const price = `${establishment.maxDiscounts}`;
-  const number = `${establishment.usedCapacity}`;
+  const number = `${establishment.peopleInQueue}`;
   const percentage = establishment.usedCapacity / establishment.capacity;
 
   return (

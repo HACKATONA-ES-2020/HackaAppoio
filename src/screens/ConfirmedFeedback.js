@@ -5,8 +5,18 @@ import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
 import colors from "../constants/colors";
+import { CommonActions } from "@react-navigation/native";
 
-export default function ConfirmedFeedback() {
+export default function ConfirmedFeedback({ navigation }) {
+  function returnToHome() {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "HomeScreen" }],
+      })
+    );
+  }
+
   return (
     <View style={styles.screen}>
       <Header imagePath={require("../assets/cassio.png")}>
@@ -34,7 +44,11 @@ export default function ConfirmedFeedback() {
               <Text style={styles.span}>100</Text> pontos!
             </Text>
           </View>
-          <Button text="Voltar ao início" style={{ marginTop: 50 }} />
+          <Button
+            text="Voltar ao início"
+            style={{ marginTop: 50 }}
+            onPress={returnToHome}
+          />
         </View>
       </ScrollView>
     </View>

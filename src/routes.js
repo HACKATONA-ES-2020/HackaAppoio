@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Image, View } from "react-native";
+import { ActivityIndicator, Image, LogBox, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -18,6 +18,8 @@ import FeedbackScreen from "./screens/FeedbackScreen";
 import ConfirmedFeedback from "./screens/ConfirmedFeedback";
 import DetailStoreScreen from "./screens/DetailStoreScreen";
 import FeedbackCameraScreen from "./screens/FeedbackCameraScreen";
+
+LogBox.ignoreAllLogs(true);
 
 const Stack = createStackNavigator();
 
