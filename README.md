@@ -9,3 +9,9 @@ cd HackaAppoio
 npm install
 npm start
 ```
+
+# Mockups
+Os mocks foram desenvolvidos utilizando a ferramenta Figma. Os mesmos podem ser encontrado no seguinte link: [no spoiler]
+
+
+
