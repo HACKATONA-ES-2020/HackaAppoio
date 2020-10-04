@@ -4,11 +4,32 @@ import colors from "../constants/colors";
 
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
+import { joinQueue } from "../api";
 
-export default function EnterQueue({ navigation }) {
+export default function EnterQueue({ navigation, route }) {
+  const { establishment } = route.params;
+
   const [preferencial, setPreferencial] = useState(false);
   const [guestNumber, setGuestNumber] = useState(1);
-  const storeName = "Loja";
+  const storeName = establishment.name;
+
+  const enterQueue = async () => {
+    const onUpdateObject = { onUpdate: (newData) => {} };
+
+    const exitQueue = await joinQueue(
+      establishment.id,
+      {
+        people: guestNumber,
+        priority: preferencial,
+      },
+      (newData) => {
+        onUpdateObject.onUpdate(newData);
+      }
+    );
+
+    navigation.navigate("PositionScreen", { exitQueue, onUpdateObject });
+  };
+
   return (
     <View style={styles.screen}>
       <Header imagePath={require("../assets/cassio.png")} />
@@ -59,10 +80,7 @@ export default function EnterQueue({ navigation }) {
             />
           </View>
         </View>
-        <Button
-          text="Entrar na fila"
-          onPress={() => navigation.navigate("PositionScreen")}
-        />
+        <Button text="Entrar na fila" onPress={enterQueue} />
       </View>
     </View>
   );

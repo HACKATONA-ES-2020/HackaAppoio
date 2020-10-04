@@ -138,4 +138,7 @@ export async function enterEstablishment(establishmentId) {
     .set(data, { mergeFields: ["queues", "peopleInQueue"] });
 }
 
-export {};
+export async function getQRCodeInfo() {
+  await __setUserId();
+  return { userId: CURRENT_USER_ID };
+}
