@@ -9,6 +9,14 @@ import colors from "../constants/colors";
 export default function App({ navigation }) {
   const [scanned, setScanned] = useState(false);
 
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+    }),
+  });
+
   function scheduleNotification(text) {
     Notifications.scheduleNotificationAsync({
       content: {
