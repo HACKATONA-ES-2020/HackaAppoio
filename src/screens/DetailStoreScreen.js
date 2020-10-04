@@ -6,7 +6,7 @@ import Header from "../components/HeaderComponent";
 import ButtonQRCode from "../components/ButtonQRCode";
 import CustomProgressBar from "../components/CustomProgressBar";
 
-export default function DetailStoreScreen(prevent) {
+export default function DetailStoreScreen({ prevent }) {
   return (
     <View style={styles.screen}>
       <Header imagePath={require("../assets/cassio.png")}>ModelScreen</Header>
@@ -16,6 +16,14 @@ export default function DetailStoreScreen(prevent) {
           <Text>Av. Bento Gonçalves, 4431 </Text>
         </Text>
         <Text style={styles.imagetext}>Imagens do local</Text>
+        <Image
+          style={{
+            width: 280,
+            height: 120,
+            borderRadius: 15,
+          }}
+          source={require("../../assets/centauro.png")}
+        />
 
         <Text style={styles.imagetext}>Status</Text>
 
@@ -58,6 +66,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: colors.background,
+    alignContent: "space-between",
   },
   listItem: {
     textAlign: "left",
@@ -75,7 +84,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   info: {
-    color: colors.textPlaceHolder,
+    color: colors.complementary_primary,
     fontWeight: "bold",
     textAlign: "left",
     fontSize: 12,
@@ -89,5 +98,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingLeft: 2,
     paddingBottom: 2,
+  },
+  input: {
+    flexDirection: "row",
   },
 });
