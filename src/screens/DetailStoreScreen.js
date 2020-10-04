@@ -6,17 +6,19 @@ import Header from "../components/HeaderComponent";
 import ButtonQRCode from "../components/ButtonQRCode";
 import CustomProgressBar from "../components/CustomProgressBar";
 import CheckedItem from "../components/CheckedItem";
-import { color } from "react-native-reanimated";
 
-export default function DetailStoreScreen({ navigation }) {
-  const alcool = false;
-  const distanciamento = false;
-  const mascara = false;
-  const higienizado = false;
+export default function DetailStoreScreen({ navigation, route }) {
+  const { establishment } = route.params;
 
-  const price = "20,00";
-  const number = "7";
-  const percentage = "90";
+  const { preventiveMeasures } = establishment;
+  const alcool = preventiveMeasures.includes(0);
+  const distanciamento = preventiveMeasures.includes(1);
+  const mascara = preventiveMeasures.includes(2);
+  const higienizado = preventiveMeasures.includes(3);
+
+  const price = `${establishment.maxDiscounts}`;
+  const number = `${establishment.usedCapacity}`;
+  const percentage = establishment.usedCapacity / establishment.capacity;
 
   return (
     <View style={styles.screen}>
@@ -24,8 +26,8 @@ export default function DetailStoreScreen({ navigation }) {
       <View style={styles.content}>
         <View style={styles.title}>
           <View>
-            <Text style={styles.listItem}>Centauro</Text>
-            <Text style={styles.info}>Av. Bento Gonçalves, 4431</Text>
+            <Text style={styles.listItem}>{establishment.name}</Text>
+            <Text style={styles.info}>{establishment.address}</Text>
           </View>
           <View style={styles.discounts}>
             <Text style={styles.discountTitle}>Descontos de</Text>
@@ -39,29 +41,20 @@ export default function DetailStoreScreen({ navigation }) {
           horizontal
           showsHorizontalScrollIndicator={false}
         >
-          <Image
-            style={styles.image}
-            source={require("../../assets/centauro.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../../assets/centauro.png")}
-          />
-          <Image
-            style={styles.image}
-            source={require("../../assets/centauro.png")}
-          />
+          {(establishment.images ?? []).map((imageUrl, index) => {
+            return <Image key={index + ""} style={styles.image} source={{ uri: imageUrl }} defaultSource={require("../assets/loading.png")} />;
+          })}
         </ScrollView>
 
         <Text style={styles.subtitle}>Status</Text>
         <CustomProgressBar
-          title={"Lotação " + percentage + "%"}
+          title={"Lotação " + (percentage * 100) + "%"}
           subTitle={number + " pessoas na fila"}
-          progress={percentage / 100}
+          progress={percentage}
           status={
-            (percentage < 30 && "bad") ||
-            (percentage < 60 && "attention") ||
-            (percentage < 100 && "good")
+            (percentage < 0.3 && "good") ||
+            (percentage < 0.6 && "attention") ||
+            (percentage < 1 && "bad")
           }
           height={18}
           width={350}
