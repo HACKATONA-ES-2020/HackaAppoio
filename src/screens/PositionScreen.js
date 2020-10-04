@@ -6,7 +6,7 @@ import * as Progress from "react-native-progress";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function EnterQueue() {
+export default function PositionScreen({ navigation }) {
   const storeName = "Loja";
   const [position, setPosition] = useState(1);
   const [time, setTime] = useState(5);

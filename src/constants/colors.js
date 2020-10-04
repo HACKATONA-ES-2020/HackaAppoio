@@ -2,6 +2,8 @@ export default colors = {
   primary: "#FF4F39",
 
   green: "#48D946",
+  yellow: "#FFCC00",
+  gray: "#D8D6D6",
 
   text: "#111111",
   textDisabled: "#4F4F4F",

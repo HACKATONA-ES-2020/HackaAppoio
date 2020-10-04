@@ -5,7 +5,7 @@ import colors from "../constants/colors";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function EnterQueue() {
+export default function EnterQueue({ navigation }) {
   const [preferencial, setPreferencial] = useState(false);
   const [guestNumber, setGuestNumber] = useState(1);
   const storeName = "Loja";
@@ -59,7 +59,10 @@ export default function EnterQueue() {
             />
           </View>
         </View>
-        <Button text="Entrar na fila" />
+        <Button
+          text="Entrar na fila"
+          onPress={() => navigation.navigate("PositionScreen")}
+        />
       </View>
     </View>
   );
