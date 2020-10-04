@@ -13,12 +13,15 @@ export default function AuthenticateScreen({ navigation }) {
   }, []);
 
   const authenticate = async (provider) => {
+    let user;
     try {
-      const user = await performGoogleSignIn();
-      console.warn(user);
+      user = await performGoogleSignIn();
     } catch (error) {
       Alert.alert(error.message);
+      return;
     }
+
+    console.warn(user);
 
     // TODO: !!
     navigation.dispatch(
@@ -39,10 +42,6 @@ export default function AuthenticateScreen({ navigation }) {
           type="google"
           style={styles.google}
           onPress={() => authenticate("google")}
-        />
-        <SocialButtonComponent
-          type="facebook"
-          onPress={() => authenticate("facebook")}
         />
       </View>
     </View>

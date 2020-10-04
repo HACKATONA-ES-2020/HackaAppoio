@@ -3,7 +3,6 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 import * as Google from "expo-google-app-auth";
 import { firebaseConfig, googleSignInConfig } from "./configs";
-import { acc } from "react-native-reanimated";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -12,6 +11,11 @@ if (!firebase.apps.length) {
 const dbh = firebase.firestore();
 
 // TODO: use dbh to access firestore collections
+
+const isSignedIn = async () => {
+  const userInfo = await _getCachedGoogleSignIn();
+  return userInfo !== null && userInfo !== undefined;
+}
 
 const performGoogleSignIn = async () => {
   try {
@@ -74,4 +78,4 @@ const _getCachedGoogleSignIn = async () => {
   }
 }
 
-export { performGoogleSignIn };
+export { isSignedIn, performGoogleSignIn };
