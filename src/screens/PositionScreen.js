@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import colors from "../constants/colors";
 import * as Progress from "react-native-progress";
+import * as Notifications from "expo-notifications";
 
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
@@ -10,6 +11,18 @@ export default function PositionScreen({ navigation }) {
   const storeName = "Loja";
   const [position, setPosition] = useState(1);
   const [time, setTime] = useState(5);
+
+  function scheduleNotification() {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: `A espera acabou!`,
+        body: `Chegou a sua vez de entrar na ${storeName} `,
+      },
+      trigger: {
+        seconds: 10,
+      },
+    });
+  }
 
   return (
     <View style={styles.screen}>
