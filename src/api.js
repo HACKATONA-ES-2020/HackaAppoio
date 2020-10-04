@@ -90,9 +90,7 @@ export async function joinQueue(
   }
 
   data.queue = updateWaitTimes(queue, data.usedCapacity * 10);
-
-  const peopleInQueue = data.queue.reduce((acc, curr) => acc + curr.people, 0);
-  data.peopleInQueue = peopleInQueue;
+  data.peopleInQueue = data.queue.reduce((acc, curr) => acc + curr.people, 0);
 
   // update doc
   await dbh
@@ -145,21 +143,20 @@ export async function enterEstablishment(establishmentId) {
   data.queue.splice(indexInQueue, 1);
 
   // update data.peopleInQueue
-  data.peopleInQueue -= queueObject.people;
+  data.peopleInQueue = data.queue.reduce((acc, curr) => acc + curr.people, 0);
+
+  // update usedCapacity
+  data.usedCapacity += queueObject.people;
 
   // update remaining entries on data.queue (estimatedWaitTime)
-  data.queue.forEach((val, index, array) => {
-    const queueBefore = array.slice(0, index);
-    const peopleInQueueBefore = queueBefore.reduce((a, b) => a + b.people, 0);
-    const waitTime = data.usedCapacity * 15 + peopleInQueueBefore * 30;
-    val.estimatedWaitTime = waitTime;
-  });
+  const queue = data.queue.slice();
+  data.queue = updateWaitTimes(queue, data.usedCapacity * 10);
 
   // send updated list to firebase
   await dbh
     .collection("establishments")
     .doc(establishmentId)
-    .set(data, { mergeFields: ["queues", "peopleInQueue"] });
+    .set(data, { mergeFields: ["queue", "peopleInQueue", "usedCapacity"] });
 }
 
 export async function getQRCodeInfo() {

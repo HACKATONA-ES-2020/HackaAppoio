@@ -27,7 +27,7 @@ export default function EnterQueue({ navigation, route }) {
       }
     );
 
-    navigation.navigate("PositionScreen", { exitQueue, onUpdateObject });
+    navigation.navigate("PositionScreen", { exitQueue, onUpdateObject, establishment });
   };
 
   return (

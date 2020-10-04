@@ -5,8 +5,9 @@ import colors from "../constants/colors";
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function PositionScreen({ navigation }) {
-  const storeName = "Loja";
+export default function PositionScreen({ navigation, route }) {
+  const { establishment } = route.params;
+  const storeName = establishment.name;
 
   return (
     <View style={styles.screen}>
@@ -21,8 +22,8 @@ export default function PositionScreen({ navigation }) {
             source={require("../assets/exit.png")}
             style={{
               alignSelf: "center",
-              width: 400,
-              height: 300,
+              width: 150,
+              height: 112.5,
               marginTop: 30,
               marginBottom: 30,
             }}

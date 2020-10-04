@@ -8,22 +8,26 @@ import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
 export default function PositionScreen({ navigation, route }) {
-  const { exitQueue, onUpdateObject } = route.params;
+  const { exitQueue, onUpdateObject, establishment } = route.params;
 
-  const storeName = "Loja";
+  const storeName = establishment.name;
   const [position, setPosition] = useState(1);
   const [time, setTime] = useState(5);
 
   useEffect(() => {
-    onUpdateObject.onUpdate = function(newData) {
+    onUpdateObject.onUpdate = function (newData) {
       const { positionInQueue, estimatedWaitTime } = newData;
       setPosition(positionInQueue);
       setTime(estimatedWaitTime);
-    }
+    };
   }, []);
 
   async function exitQueuePressed() {
     await exitQueue();
+  }
+
+  async function enterEstablishmentPressed() {
+    navigation.navigate("QRCodeGeneratorUserScreen", { establishment });
   }
 
   function scheduleNotification() {
@@ -62,10 +66,7 @@ export default function PositionScreen({ navigation, route }) {
               Em torno de <Text style={styles.name}>{time}</Text> minutos você
               será chamado
             </Text>
-            <Button
-              text="Sair da fila"
-              onPress={exitQueuePressed}
-            />
+            <Button text="Sair da fila" onPress={exitQueuePressed} />
           </>
           <Progress.Bar
             indeterminate
@@ -99,7 +100,7 @@ export default function PositionScreen({ navigation, route }) {
           <View>
             <Button
               text="Entrar no local"
-              onPress={() => navigation.navigate("QRCodeGeneratorUserScreen")}
+              onPress={enterEstablishmentPressed}
             />
           </View>
         </View>
