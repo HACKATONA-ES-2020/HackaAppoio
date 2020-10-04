@@ -28,7 +28,7 @@ export default function PositionScreen({ navigation }) {
 
         <Button
           text="Ja saí do local"
-          onPress={() => navigation.navigate("PositionScreen")}
+          onPress={() => navigation.navigate("FeedbackScreen")}
         />
       </View>
     </View>

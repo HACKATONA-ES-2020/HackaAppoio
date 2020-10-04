@@ -1,10 +1,12 @@
-import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import HeaderComponent from "../components/HeaderComponent";
 import { QRCode as CustomQRCode } from "react-native-custom-qr-codes-expo";
 import colors from "../constants/colors";
 
-export default function App() {
+export default function App({ navigation }) {
+  const [scanned, setScanned] = useState(false);
+
   return (
     <View style={styles.screen}>
       <HeaderComponent imagePath={require("../assets/cassio.png")} />
@@ -21,7 +23,14 @@ export default function App() {
         {/* id : quantidade de pessoas*/}
         <CustomQRCode linearGradient={[colors.primary]} content="4:3" />
       </View>
-      <Text style={styles.subtext}>Assim seus pontos serão validados! :)</Text>
+      <TouchableOpacity
+        style={styles.secretButton}
+        onPress={() => navigation.navigate("ExitScreen")}
+      >
+        <Text style={styles.subtext}>
+          Assim seus pontos serão validados! :)
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -58,5 +67,8 @@ const styles = StyleSheet.create({
     color: colors.textDisabled,
     fontSize: 20,
     fontWeight: "bold",
+  },
+  secretButton: {
+    backgroundColor: colors.transparent,
   },
 });

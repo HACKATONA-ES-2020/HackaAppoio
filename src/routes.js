@@ -7,6 +7,9 @@ import PositionScreen from "./screens/PositionScreen";
 import QRCodeReaderScreen from "./screens/QRCodeReaderScreen";
 import QRCodeGeneratorUserScreen from "./screens/QRCodeGeneratorUserScreen";
 import EnterQueueScreen from "./screens/EnterQueueScreen";
+import ModelScreen from "./screens/ModelScreen";
+import FeedbackScreen from "./screens/FeedbackScreen";
+import ConfirmedFeedback from "./screens/ConfirmedFeedback";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +28,8 @@ export function Screens() {
           component={QRCodeGeneratorUserScreen}
         />
         <Stack.Screen name="ExitScreen" component={ExitScreen} />
+        <Stack.Screen name="FeedbackScreen" component={FeedbackScreen} />
+        <Stack.Screen name="ConfirmedFeedback" component={ConfirmedFeedback} />
       </Stack.Navigator>
     </NavigationContainer>
   );
