@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   teste: {
     alignItems: "center",
     justifyContent: "center",
-    color: colors.textWhite,
+    color: colors.primary,
     fontSize: 30,
     fontWeight: "bold",
   },
