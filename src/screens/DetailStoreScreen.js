@@ -6,14 +6,17 @@ import Header from "../components/HeaderComponent";
 import ButtonQRCode from "../components/ButtonQRCode";
 import CustomProgressBar from "../components/CustomProgressBar";
 
-export default function EnterQueue() {
+export default function DetailStoreScreen() {
   return (
     <View style={styles.screen}>
       <Header imagePath={require("../assets/cassio.png")}>ModelScreen</Header>
       <View style={styles.content}>
         <Text style={styles.listItem}>Centauro</Text>
         <View style={styles.button}></View>
-        <ButtonQRCode onPress={() => onPress}></ButtonQRCode>
+        <ButtonQRCode
+          imagePath={require("../../assets/logo.png")}
+          onPress={() => onPress}
+        ></ButtonQRCode>
         <Text style={styles.info}>
           <Text>Av. Bento Gonçalves </Text>
         </Text>
