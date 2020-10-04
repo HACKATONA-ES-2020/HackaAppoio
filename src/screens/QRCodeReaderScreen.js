@@ -1,10 +1,16 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { processQRCode } from "../api";
 import BarcodeCamera from "../components/BarCodeCamera";
 import HeaderComponent from "../components/HeaderComponent";
 import colors from "../constants/colors";
 
 export default function QRCodeReaderScreen({ navigation }) {
+  const didReadCode = async (readData) => {
+    const establishment = await processQRCode(readData);
+    navigation.navigate("EnterQueueScreen", { establishment });
+  };
+
   return (
     <View style={styles.screen}>
       <HeaderComponent imagePath={require("../assets/cassio.png")} />
@@ -12,9 +18,7 @@ export default function QRCodeReaderScreen({ navigation }) {
         <Text style={styles.text}>Aponte seu celular para o código QR</Text>
       </View>
       <View style={styles.camera}>
-        <BarcodeCamera
-          onChange={(data) => navigation.navigate("EnterQueueScreen", { data })}
-        />
+        <BarcodeCamera onChange={didReadCode} />
       </View>
     </View>
   );

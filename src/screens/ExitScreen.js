@@ -1,12 +1,19 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import colors from "../constants/colors";
+import { leaveEstablishment } from "../api";
 
 import Header from "../components/HeaderComponent";
 import Button from "../components/ButtonComponent";
 
-export default function PositionScreen({ navigation }) {
-  const storeName = "Loja";
+export default function PositionScreen({ navigation, route }) {
+  const { establishment, people: numberOfPeople } = route.params;
+  const storeName = establishment.name;
+
+  async function leftEstablishmentPressed() {
+    await leaveEstablishment(establishment.id, numberOfPeople);
+    navigation.navigate("FeedbackScreen");
+  }
 
   return (
     <View style={styles.screen}>
@@ -21,8 +28,8 @@ export default function PositionScreen({ navigation }) {
             source={require("../assets/exit.png")}
             style={{
               alignSelf: "center",
-              width: 400,
-              height: 300,
+              width: 150,
+              height: 112.5,
               marginTop: 30,
               marginBottom: 30,
             }}
@@ -36,10 +43,7 @@ export default function PositionScreen({ navigation }) {
           </Text>
         </View>
 
-        <Button
-          text="Ja saí do local"
-          onPress={() => navigation.navigate("FeedbackScreen")}
-        />
+        <Button text="Ja saí do local" onPress={leftEstablishmentPressed} />
       </View>
     </View>
   );
